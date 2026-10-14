@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Жүйеге кіру — Студент жоспары{% endblock %}
+{% block content %}
+<section class="auth-layout">
+    <div class="auth-intro">
+        <span class="eyebrow">ӨЗ КҮНІҢДІ ЖОСПАРЛА</span>
+        <h1>Кішкентай қадамдар.<br>Үлкен нәтижелер.</h1>
+        <p>Сабақ, жаттығу және жеке жоспар — бәрі бір жерде. Маңызды істерді ұмытпай, өз қарқыныңмен алға жылжы.</p>
+        <div class="preview-note"><span class="note-check" aria-hidden="true">✓</span><div><strong>Бүгінгі мақсат</strong><span>Бір тапсырманы аяқтаудан баста.</span></div></div>
+        <div class="intro-tags"><span>Қарапайым жоспар</span><span>Айқын нәтиже</span></div>
+    </div>
+    <div class="form-panel">
+        <span class="eyebrow">ҚОШ КЕЛДІҢ!</span>
+        <h2>Жүйеге кіру</h2>
+        <p class="muted">Жоспарыңды жалғастыру үшін деректеріңді енгіз.</p>
+        <form class="stack-form" method="post" action="{{ url_for('login') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="field"><label for="username">Пайдаланушы аты</label><input id="username" name="username" value="{{ username }}" maxlength="30" autocomplete="username" placeholder="Мысалы: aibol" required></div>
+            <div class="field"><label for="password">Құпиясөз</label><input id="password" name="password" type="password" maxlength="128" autocomplete="current-password" placeholder="Құпиясөзіңді енгіз" required></div>
+            <button class="btn btn-primary btn-full" type="submit">Кіру <span aria-hidden="true">→</span></button>
+        </form>
+        <p class="form-footnote">Тіркелгің жоқ па? <a href="{{ url_for('register') }}">Тіркелу</a></p>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block title %}{{ code }} — Студент жоспары{% endblock %}
+{% block content %}
+<section class="empty-state error-state"><span class="error-code">{{ code }}</span><h1>{{ 'Бет табылмады' if code == 404 else 'Сұрау қабылданбады' }}</h1><p>{{ message }}</p><a class="btn btn-primary" href="{{ url_for('index') }}">Басты бетке өту</a></section>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Жаңа тапсырма — Студент жоспары{% endblock %}
+{% block content %}
+<div class="page-heading"><span class="eyebrow">БІР ҚАДАМ АЛҒА</span><h1>Жаңа тапсырма</h1><p>Ойыңдағы істі нақты жоспарға айналдыр.</p></div>
+<section class="editor-layout">
+    <div class="form-panel editor-panel">
+        <h2>Тапсырма мәліметтері</h2>
+        <p class="muted">Қысқа әрі түсінікті атау жаз.</p>
+        <form class="stack-form" method="post" action="{{ url_for('new_task') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="field"><label for="title">Тапсырма атауы <span class="required-mark">*</span></label><input id="title" name="title" value="{{ title }}" maxlength="100" placeholder="Мысалы: HTML бойынша жаттығуды орындау" required><small>Ең көбі 100 таңба.</small></div>
+            <div class="field"><label for="description">Қысқаша сипаттама</label><textarea id="description" name="description" rows="5" maxlength="500" placeholder="Қандай қадамдарды орындау керек?">{{ description }}</textarea><small>Міндетті емес. Ең көбі 500 таңба.</small></div>
+            <div class="form-actions">
+                <button class="btn btn-primary" type="submit">Тапсырманы сақтау</button>
+                <a class="btn btn-outline" href="{{ url_for('tasks') }}">Артқа</a>
+            </div>
+        </form>
+    </div>
+    <aside class="tip-panel"><span class="eyebrow">ШАҒЫН КЕҢЕС</span><h2>Нақты жазсаң,<br>бастау оңай.</h2><p>«Оқу» дегеннен гөрі «HTML тегтерін қайталау» деген тапсырма түсініктірек болады.</p><div class="tip-example"><span>Мысал</span><strong>CSS карточкасын безендіру</strong><p>Фон түсін таңдау, аралықтарды реттеу.</p></div></aside>
+</section>
+{% endblock %}

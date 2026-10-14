@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Нұсқаулық — Студент жоспары{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/guide.css') }}">
+{% endblock %}
+{% block content %}
+<div class="page-heading"><span class="eyebrow">БӘРІ ҚАРАПАЙЫМ</span><h1>Сайтты қалай қолданамыз?</h1><p>Күнделікті жоспарды реттеуге арналған қысқа нұсқаулық.</p></div>
+<section class="guide-steps" aria-label="Сайтты қолдану қадамдары">
+    <article class="guide-step"><span class="step-number">01</span><h2>Тапсырма қос</h2><p>«Жаңа тапсырма» бетінде атау мен сипаттама жазып, «Тапсырманы сақтау» батырмасын бас.</p></article>
+    <article class="guide-step"><span class="step-number">02</span><h2>Орындалғанын белгіле</h2><p>Іс аяқталған кезде карточкадағы «Аяқтау» батырмасын бас. Күйі «Орындалды» болып өзгереді.</p></article>
+    <article class="guide-step"><span class="step-number">03</span><h2>Жоспарды жаңарт</h2><p>Қажет болса, тапсырманы қайта жоспарла немесе өшір. Жоғарғы сандар автоматты түрде жаңарады.</p></article>
+</section>
+<section class="guide-banner"><div><h2>Ең маңыздысы — бастау.</h2><p>Бүгін орындайтын бір тапсырмаңды таңда.</p></div><a class="btn btn-primary" href="{{ url_for('tasks') }}">Тапсырмаларға өту</a></section>
+{% endblock %}

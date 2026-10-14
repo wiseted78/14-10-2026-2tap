@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Студенттің тапсырмалар тізімі{% endblock %}
+{% block content %}
+<section class="dashboard-hero">
+    <div class="hero-copy">
+        <span class="eyebrow">СӘЛЕМ, {{ g.user['username'] }}!</span>
+        <h1>Студенттің<br>тапсырмалар тізімі</h1>
+        <p>Әр аяқталған тапсырма — мақсатыңа жақындаған бір қадам.</p>
+        <a class="btn btn-primary" href="{{ url_for('new_task') }}"><span aria-hidden="true">+</span> Тапсырма қосу</a>
+    </div>
+    <div class="hero-note">
+        <span class="note-label">БҮГІНГІ ОЙ</span>
+        <span class="hero-check" aria-hidden="true">✓</span>
+        <h2>Өз қарқыныңмен<br>алға жылжы.</h2>
+        <p>Бәрін бірден орындау міндетті емес. Ең маңызды істен баста.</p>
+    </div>
+</section>
+<section class="stats-grid" aria-label="Тапсырмалар статистикасы">
+    <div class="stat-card"><span>Барлық тапсырма</span><strong>{{ total }}<small>тапсырма</small></strong></div>
+    <div class="stat-card"><span>Орындалмаған</span><strong>{{ total - completed }}<small>тапсырма</small></strong></div>
+    <div class="stat-card stat-success"><span>Орындалған</span><strong>{{ completed }}<small>тапсырма</small></strong></div>
+</section>
+<section class="task-section" aria-labelledby="task-heading">
+    <div class="section-heading">
+        <div><span class="eyebrow">СЕНІҢ ЖОСПАРЫҢ</span><h2 id="task-heading">Менің тапсырмаларым</h2></div>
+        <a class="text-link" href="{{ url_for('guide') }}">Нұсқаулықты оқу <span aria-hidden="true">↗</span></a>
+    </div>
+    {% if tasks %}
+        <div class="task-grid">
+            {% for task in tasks %}
+                <article class="task-card {{ 'is-done' if task['done'] else '' }}">
+                    <div class="task-card-top"><span class="task-status {{ 'status-done' if task['done'] else 'status-pending' }}">{{ 'Орындалды' if task['done'] else 'Жоспарда' }}</span><span class="task-number">№{{ loop.index }}</span></div>
+                    <h3>{{ task['title'] }}</h3>
+                    <p class="task-description">{{ task['description'] or 'Бұл тапсырмаға сипаттама қосылмаған.' }}</p>
+                    <div class="task-actions">
+                        <form method="post" action="{{ url_for('toggle_task', task_id=task['id']) }}">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <button class="btn btn-small {{ 'btn-outline' if task['done'] else 'btn-soft' }}" type="submit">{{ 'Қайта жоспарлау' if task['done'] else 'Аяқтау' }}</button>
+                        </form>
+                        <form method="post" action="{{ url_for('delete_task', task_id=task['id']) }}">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <button class="delete-button" type="submit" aria-label="{{ task['title'] }} тапсырмасын өшіру">Өшіру</button>
+                        </form>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state"><span class="empty-symbol" aria-hidden="true">+</span><h3>Жаңа жоспарға орын бар</h3><p>Алғашқы тапсырмаңды қосып, бүгінгі күніңді жоспарла.</p><a class="btn btn-primary" href="{{ url_for('new_task') }}">Тапсырма қосу</a></div>
+    {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Тіркелу — Студент жоспары{% endblock %}
+{% block content %}
+<section class="auth-layout">
+    <div class="auth-intro">
+        <span class="eyebrow">ЖАҢА БАСТАМА</span>
+        <h1>Оқу жоспарыңды<br>осы жерден баста.</h1>
+        <p>Тіркел де, өз тапсырмаларыңды қос. Орындалған істерді белгілеп, жетістігіңді бақыла.</p>
+        <div class="preview-note"><span class="note-check" aria-hidden="true">✓</span><div><strong>Алғашқы үш тапсырма</strong><span>Тіркелгенде үлгі тапсырмалар автоматты түрде қосылады.</span></div></div>
+        <div class="intro-tags"><span>Жеке тапсырмалар</span><span>Ыңғайлы тізім</span></div>
+    </div>
+    <div class="form-panel">
+        <span class="eyebrow">ТІРКЕЛГІ ЖАСАУ</span>
+        <h2>Тіркелу</h2>
+        <p class="muted">Пайдаланушы аты мен құпиясөз ойлап тап.</p>
+        <form class="stack-form" method="post" action="{{ url_for('register') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="field"><label for="username">Пайдаланушы аты</label><input id="username" name="username" value="{{ username }}" minlength="3" maxlength="30" autocomplete="username" placeholder="Мысалы: student01" required><small>3–30 таңба.</small></div>
+            <div class="field"><label for="password">Құпиясөз</label><input id="password" name="password" type="password" minlength="6" maxlength="128" autocomplete="new-password" placeholder="Кемінде 6 таңба" required><small>6–128 таңба.</small></div>
+            <button class="btn btn-primary btn-full" type="submit">Тіркелу <span aria-hidden="true">→</span></button>
+        </form>
+        <p class="form-footnote">Тіркелгің бар ма? <a href="{{ url_for('login') }}">Кіру</a></p>
+    </div>
+</section>
+{% endblock %}
